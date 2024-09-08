@@ -8,7 +8,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 function DetailContainer() {
   const { filteredMovies } = useContext(MovieContext);
 
-  const firstMovieId = filteredMovies.length > 0 ? filteredMovies[7].id : null;
+  const firstMovieId = filteredMovies.length > 0 ? filteredMovies[0].id : null;
 
   return (
     <div className="lg:pl-56 px-6 pt-5 relative">
