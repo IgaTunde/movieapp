@@ -5,8 +5,9 @@ import Discover from "./Discover";
 import Genre from "./Genre";
 import Shelf from "./Shelf";
 import Img from "../images/movieImg.svg";
+import TopRated from "./TopRated";
 
-function SideBar() {
+function SideBar({ isOpen, toggleSidebar }) {
   const { menuOpen, toggleMenu, handleSidebarClick } = useContext(MovieContext);
 
   return (

@@ -8,6 +8,8 @@ import MovieHeader from "./components/header/MovieHeader";
 import SideBar from "./components/aside/SideBar";
 import Hero from "./components/heroSection/Hero";
 import DetailContainer from "./components/details/DetailContainer";
+import TopRated from "./components/aside/TopRated";
+import Upcoming from "./components/aside/Upcoming";
 
 function App() {
   return (
@@ -18,10 +20,15 @@ function App() {
           <div className="flex justify-between">
             <SideBar />
             <div className="w-full">
+              <Routes>
+                <Route path="/" element={<MovieList />} />
+                <Route path="/topRated" element={<TopRated />} />
+                <Route path="/upcoming" element={<Upcoming />} />
+              </Routes>
               <Hero />
-      <MovieDetailsProvider>
-              <DetailContainer />
-        </MovieDetailsProvider>
+              <MovieDetailsProvider>
+                <DetailContainer />
+              </MovieDetailsProvider>
               <MovieList />
             </div>
           </div>

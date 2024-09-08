@@ -32,6 +32,7 @@ export default function MovieProvider({ children }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isWatchLater, setIsWatchLater] = useState(false);
 
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
