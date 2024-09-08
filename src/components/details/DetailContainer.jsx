@@ -1,4 +1,3 @@
-import DetailPoster from "./DetailPoster";
 import MoviesInfo from "./MoviesInfo";
 import { useContext } from "react";
 import { MovieContext } from "../context/MovieContext";
@@ -13,15 +12,11 @@ function DetailContainer() {
 
   return (
     <div className="lg:pl-56 px-6 pt-5 relative">
-      <button className="border px-5 shadow-xl py-1 rounded-md my-3 dark:border-none dark:bg-darkBlueDarkModeEL dark:shadow-veryDarkBlueLightModeText dark:shadow-md">
+      <button className="border px-5 shadow-xl py-1 rounded-full my-3 dark:border-none dark:bg-darkBlueDarkModeEL dark:shadow-veryDarkBlueLightModeText dark:shadow-md">
         <FontAwesomeIcon icon={faArrowLeft} className="pr-3" />
         Back
       </button>
-      {firstMovieId ? (
-        <DetailPoster movieId={firstMovieId} />
-      ) : (
-        <p>No movie selected</p>
-      )}
+
       {firstMovieId ? (
         <MoviesInfo movieId={firstMovieId} />
       ) : (

@@ -2,6 +2,46 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const MovieCarousel = ({ cast }) => {
+  const settings = {
+    infinite: true,
+    speed: 2000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+  };
+
+  return (
+    <div className="movie-carousel w-52 mt-5">
+      <h4 className="text-center md:text-xl font-bold pb-3 md:pb-5 text-gray-600 dark:text-white">
+        CAST
+      </h4>
+      <Slider {...settings}>
+        {cast.map((castMember) => (
+          <div
+            key={castMember.cast_id}
+            className="px-2 flex flex-col items-center justify-center"
+          >
+            <div
+              className="bg-cover bg-center rounded-full h-[50px] w-[50px] mx-auto shadow-sm shadow-black/30"
+              style={{
+                backgroundImage: `url(https://image.tmdb.org/t/p/w500${castMember.profile_path})`,
+              }}
+            ></div>
+            <p className="mt-2 text-xs text-center">{castMember.name}</p>
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
+};
+
+export default MovieCarousel;
+
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -35,34 +75,3 @@ function SamplePrevArrow(props) {
     />
   );
 }
-
-function Carousels() {
-  const settings = {
-    infinite: true,
-    speed: 2000,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    cssEase: "linear",
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  };
-  return (
-    <div className=" w-52">
-      <h4 className="">Cast</h4>
-      <main className="">
-        <div className="">
-          <Slider {...settings} className="">
-            <div className="bg-[url('./src/components/images/chucky.avif')] rounded-full h-[50px] bg-center bg-contain shadow-sm shadow-black/30"></div>
-            <div className="bg-[url('./src/components/images/chucky.avif')] rounded-full h-[50px] bg-center bg-contain shadow-sm shadow-black/30"></div>
-            <div className="bg-[url('./src/components/images/chucky.avif')] rounded-full h-[50px] bg-center bg-contain shadow-sm shadow-black/30"></div>
-            <div className="bg-[url('./src/components/images/chucky.avif')] rounded-full h-[50px] bg-center bg-contain shadow-sm shadow-black/30"></div>
-          </Slider>
-        </div>
-      </main>
-    </div>
-  );
-}
-
-export default Carousels;
