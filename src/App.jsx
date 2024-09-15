@@ -19,7 +19,7 @@ function App() {
           <MovieHeader />
           <div className="flex justify-between">
             <SideBar />
-            <div className="w-full">
+            <div className="w-full pt-[70px] md:pt-[100px]">
               <Routes>
                 <Route path="/" element={<MovieList />} />
                 <Route path="/topRated" element={<TopRated />} />
@@ -29,7 +29,6 @@ function App() {
               <MovieDetailsProvider>
                 <DetailContainer />
               </MovieDetailsProvider>
-              <MovieList />
             </div>
           </div>
         </div>
