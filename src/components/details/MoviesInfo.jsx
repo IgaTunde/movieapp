@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import MoviePoster from "./DetailPoster";
 import MovieArticles from "././MovieArticles";
 import MovieCarousel from "./Carousels";
+import BounceLoader from "react-spinners/BounceLoader";
 
 function MoviesInfo({ movieId }) {
   const [movieDetails, setMovieDetails] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
+        setLoading(true);
         const response = await fetch(
           `https://api.themoviedb.org/3/movie/${movieId}?api_key=b90cdfd0482956c54aac04934c15e07b&language=en-US&append_to_response=credits`
         );
@@ -29,7 +31,18 @@ function MoviesInfo({ movieId }) {
     fetchMovieDetails();
   }, [movieId]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="flex flex-col justify-center items-center">
+        <BounceLoader
+          color={"red"}
+          loading={loading}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
   if (error) return <p>Error: {error}</p>;
   if (!movieDetails) return <p>Movie details not found.</p>;
 

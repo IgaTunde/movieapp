@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import { MovieContext } from "../context/MovieContext";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faEye, faStar } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
 
-function MovieData({ data, onClick }) {
+function GenreData({ data, onClick }) {
   return (
     <div
       className="hover:border-2 border-rose-600 p-1 rounded-xl hover:scale-125 cursor-pointer transition-all duration-500"
@@ -35,9 +35,36 @@ function MovieData({ data, onClick }) {
   );
 }
 
-function MovieList() {
-  const { filteredMovies } = useContext(MovieContext);
+function GenreList() {
+  const [genreDetails, setGenreDetails] = useState();
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { genreId } = useParams();
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `https://api.themoviedb.org/3/discover/movie?api_key=b90cdfd0482956c54aac04934c15e07b&with_genres=${genreId}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log(data);
+        setGenreDetails(data.results);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, [genreId]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="">
@@ -55,8 +82,8 @@ function MovieList() {
       </div>
 
       <div className="grid place-content-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full pt-9 md:pt-12 lg:pl-56 gap-10 sm:gap-12 lg:gap-16 px-24 sm:px-8 lg:pr-16">
-        {filteredMovies.map((movie) => (
-          <MovieData
+        {genreDetails.map((movie) => (
+          <GenreData
             key={movie.id}
             data={movie}
             onClick={() => navigate(`/${movie.id}`)}
@@ -67,4 +94,4 @@ function MovieList() {
   );
 }
 
-export default MovieList;
+export default GenreList;

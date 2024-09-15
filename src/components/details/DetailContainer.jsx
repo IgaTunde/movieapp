@@ -1,14 +1,11 @@
 import MoviesInfo from "./MoviesInfo";
-import { useContext } from "react";
-import { MovieContext } from "../context/MovieContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
 
 function DetailContainer() {
-  const { filteredMovies } = useContext(MovieContext);
-
-  const firstMovieId = filteredMovies.length > 0 ? filteredMovies[4].id : null;
+  const { movieId } = useParams();
 
   return (
     <div className="lg:pl-56 px-6 pt-5 relative">
@@ -17,11 +14,7 @@ function DetailContainer() {
         Back
       </button>
 
-      {firstMovieId ? (
-        <MoviesInfo movieId={firstMovieId} />
-      ) : (
-        <p>No movie selected</p>
-      )}
+      {movieId ? <MoviesInfo movieId={movieId} /> : <p>No movie selected</p>}
     </div>
   );
 }

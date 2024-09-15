@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Genre() {
   const [genres, setGenres] = useState([]);
@@ -34,13 +35,12 @@ function Genre() {
       ) : (
         <ul className="text-xs">
           {genres.map((genre) => (
-            <li
-              key={genre.id}
-              className="border-black/60 transition-all duration-100 rounded-full hover:border-2 py-1 my-3 pl-4"
-            >
-              <FontAwesomeIcon icon={faFilm} className="pr-1" />
-              {genre.name}
-            </li>
+            <Link to={`/genre/${genre.id}`} key={genre.id}>
+              <li className="border-black/60 transition-all duration-100 rounded-full hover:border-2 py-1 my-3 pl-4">
+                <FontAwesomeIcon icon={faFilm} className="pr-1" />
+                {genre.name}
+              </li>
+            </Link>
           ))}
         </ul>
       )}
